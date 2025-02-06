@@ -1,0 +1,1163 @@
+@import url('https://fonts.googleapis.com/css2?family=Agdasima:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
+
+body{
+  margin: 0;
+  background-color: #CFCFCF;
+}
+
+/* ------------------ LOGIN REGISTER ------------------ */
+.container-Login-Register{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+.logRegEmployee, .logRegMember{
+  border-radius: 50px;
+  font-weight: 200;
+  font-family: "Agdasima", sans-serif;
+  font-size: 30px;
+  padding: 10px 25px;
+  cursor: pointer;
+  background-color: #1B253D;
+  border: none;
+  color: white;
+}
+.logRegMember:hover, .logRegEmployee:hover {
+  background-color: white;
+  color: #1B253D;
+  border: solid 1px #1B253D;
+  margin: -1px;
+}
+
+.logo-nav {
+  max-width: 160px;
+  max-height: 40px;
+  width: 160px;
+  height: 40px;
+  background-image: url('img/fixfinder-high-resolution-logo-white-transparent.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+/* --------------- PROFILES -------------- */
+
+html{
+  height: 0;
+}
+.Welcome{
+  font-family: "Agdasima", sans-serif;
+  font-size: 50px;
+  font-weight: 600;
+}
+.Welcome-User{
+  font-family: "Agdasima", sans-serif;
+  font-size: 40px;
+}
+.main-m-profile-right-view{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 50px 1fr;
+  grid-template-areas: 
+  "view-head view-head"
+  "view-body view-body";
+}
+.view-head{
+  grid-area: view-head;
+  margin: auto;
+}
+.view-body{
+  grid-area: view-body;
+  text-align: center;
+  margin: auto;
+}
+.search-view > input{
+  border: none;
+  background-color: gainsboro;
+  padding: 10px 30px;
+  border-radius: 30px;
+  margin-right: 10px;
+}
+.search-view > button{
+  background-color:#303f64;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+
+.member-profile-container{
+  position: absolute;
+  background-color: white;
+  width: 800px;
+  height: 500px;
+  bottom: 30px;
+  left: 260px;
+  border-radius: 10px;
+  text-align: center;
+}
+.profile-content{
+  display: grid;
+  grid-template-columns: 20% 80%;
+  grid-template-rows: 100%;
+  grid-template-areas:
+  "m-profile-sidebar m-main-profile"
+  "m-profile-sidebar m-main-profile";
+}
+.m-profile-sidebar{
+  grid-area: m-profile-sidebar;
+  background-color: gainsboro;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.m-profile-form{
+  font-family: "Agdasima", sans-serif;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 25%;
+  margin-top: 10%;
+  height: 0;
+}
+.m-profile-form-security{
+  font-family: "Agdasima", sans-serif;
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  margin: 25%;
+  margin-top: 20%;
+  height: 0;
+}
+.m-profile-form > input, .m-profile-form-security > input{
+  border: none;
+  background-color: gainsboro;
+  padding: 10px;
+  border-radius: 50px;
+}
+.m-profile-form > button, .m-profile-form-security > button, .availability-form > button{
+  background-color: #1B253D;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 50px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+.m-profile-form > button:hover, .m-profile-form-security > button:hover{
+  background-color: #617194;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  word-wrap: break-word; /* Allows long words to break */
+  overflow-wrap: anywhere; /* Ensures breaking happens anywhere if needed */
+  max-width: 400px; /* Optional: restrict the modal width */
+  width: 90%; /* Ensures responsiveness */
+  text-align: left; /* Makes text easier to read */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  background-color: #fff;
+}
+
+
+/* ---- EMLPOYEE PROFILE ---- */
+.e-profile-form{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 90% 10%;
+  grid-template-areas: 
+  "e-profile-form-left e-profile-form-right"
+  "e-profile-form-save-btn e-profile-form-save-btn";
+  gap: 10px;
+  margin: 30px;
+  justify-content: center;
+  font-family: "Agdasima", sans-serif;
+}
+.e-profile-form-left > input{
+  border: none;
+  background-color: gainsboro;
+  padding: 10px;
+}
+.e-profile-form-left{
+  display: flex;
+  flex-direction: column;
+  grid-area: e-profile-form-left;
+}
+.e-profile-form-right{
+  display: flex;
+  flex-direction: column;
+  grid-area: e-profile-form-right;
+}
+.e-profile-form-right > textarea{
+  resize: none;
+  height: 74%;
+  width: 98%;
+}
+
+.e-profile-form-save-btn{
+  grid-area: e-profile-form-save-btn;
+  margin: 5px;
+}
+.e-profile-form-save-btn > button{
+  background-color: #1B253D;
+  color: white;
+  border: none;
+  padding: 10px 30%;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.e-profile-form-save-btn > button:hover{
+  background-color: #617194;
+  color: white;
+}
+
+.m-profile-sidebar-list > button{
+  background-color: #656fc9;
+  width: 90%;
+  height: 90%;
+  color: white;
+  margin: 5px;
+  border: none;
+  cursor: pointer;
+}
+.m-profile-sidebar-list > button:hover{
+  background-color: rgb(182, 182, 182);
+}
+.m-main-profile{
+  grid-area: m-main-profile;
+}
+
+.availability-form{
+  font-family: "Agdasima", sans-serif;
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin: 5%;
+  margin-top: 7%;
+  height: 0;
+}
+/* -------------------------- HOME PAGE ------------------------ */
+
+.container{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 70px 565px 640px;
+  grid-template-areas: 
+  "nav nav"
+  "section1 section1"
+  "section2 section2";
+}
+
+/* ---- NAV ----*/
+nav{
+  background-color: #1B253D;
+  grid-area: nav;
+  display: flex;
+  justify-content: space-between;
+  color: white;
+  align-items: center;
+  font-family: "Agdasima", sans-serif;
+  font-weight: 400px;
+  font-size: 20px;
+}
+.left-nav{
+  margin: 10px;
+}
+.right-nav{
+  display: flex;
+  margin-right: 20px;
+  gap: 20px;
+}
+.nav-list{
+  cursor: pointer;
+}
+.nav-list:hover{
+  color: rgb(199, 199, 199);
+}
+
+/* ---- MAIN ---- */
+.signuplogin-main{
+  background-image: url("img/fixfinder-logo.png");
+  background-repeat: no-repeat;
+  background-position: right;
+  background-size: auto;
+  background-blend-mode:soft-light;
+  background-color: rgb(221, 221, 221);
+  text-align: center;
+  align-content: center;
+  grid-area: section1;
+}
+h1{
+  font-family: "Agdasima", sans-serif;
+  font-weight: 700;
+  font-size: 55px;
+}
+.sign-up-btn{
+  background-color: #1B253D;
+  color: white;
+  border: none;
+}
+.sign-up-choose{
+  position: absolute;
+  background-color: #1b253df3;
+  color: white;
+  font-weight: 100;
+  font-family: "Agdasima", sans-serif;
+  left: 0; 
+  right: 0;
+  margin-inline: auto; 
+  width: 400px;
+  height: 160px;
+  top: 260px;
+  border-radius: 10px;
+}
+.close{
+  cursor: pointer;
+  display: flex;
+  width: 0;
+}
+.signupAs-btn{
+
+}
+.signupAs-btn > button{
+  font-family: "Agdasima", sans-serif;
+  color: #1B253D;
+  border: #1B253D 1px solid;
+  font-size: 30px;
+  border-radius: 20px;
+  padding: 0 30px;
+  cursor: pointer;
+}
+.signupAs-btn > button:hover{
+  font-family: "Agdasima", sans-serif;
+  color: #ffffff;
+  border: #617194 1px solid;
+  background-color: #303f64;
+  font-size: 30px;
+  border-radius: 20px;
+  padding: 0 30px;
+}
+.login-in-btn{
+  border: #1B253D 1px solid;
+  color: #1B253D;
+}
+.sign-up-btn, .login-in-btn{
+  border-radius: 50px;
+  font-weight: 200;
+  font-family: "Agdasima", sans-serif;
+  font-size: 30px;
+  padding: 10px 25px;
+  margin: 20px;
+  cursor: pointer;
+}
+.sign-up-btn:hover{
+  background-color: white;
+  color: #1B253D;
+  border: #1B253D 1px solid;
+  padding: 10px 24px;
+}
+.login-in-btn:hover{
+  background-color: #1B253D;
+  color: white;
+}
+.aboutus-main{
+  background-color: white;
+  text-align: center;
+  align-content: center;
+  grid-area: section2;
+}
+.aboutus > p{
+  text-wrap:balance;
+  font-family: "Agdasima", sans-serif;
+  font-size: 25px;
+}
+
+/* ------------------------- MEMBER LOGIN_REGISTER ------------------------ */
+.loginregister-body{
+  overflow: hidden;
+}
+
+.logo{
+  position: absolute;
+  background-color: #1B253D;
+  width: 50%;
+  height: 100%;
+}
+
+.biglogo{
+  background-image: url('img/fixfinder-high-resolution-logo-white-transparent-LOGO.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+  width: 350px;
+  height: 300px;
+  margin: auto;
+  padding: 50px;
+}
+.logoRight{
+  position: absolute;
+  background-color: #1B253D;
+  right: 0;
+  width: 50%;
+  height: 100%;
+}
+.logoRight > h3, .logo > h3{
+  color: #ffffff;
+  font-size: 40px;
+  font-weight: 100;
+  text-align: center;
+}
+.logoRight > img, .logo > img{
+  display: block;
+  margin: auto;
+  margin-top: 70px;
+}
+
+.container-mls{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 633px;
+  grid-template-areas: 
+  "registerMember loginMember";
+  background-color: #ECECEA;
+}
+
+/* -- REGISTER MEMBER -- */
+.register-mls{
+  grid-area: registerMember;
+}
+.register-mls > .back-homepage{
+  position: absolute;
+  top: 0;
+  right: 50%;
+  color: #1B253D;
+  font-family: "Agdasima", sans-serif;
+  font-size: 30px;
+  font-weight: 500;
+  text-align: end;
+  margin: 0 5px 0 0;
+  cursor: pointer;
+  text-decoration: none;
+}
+.login-mls > .back-homepage{
+  position: absolute;
+  top: 0;
+  color: #1B253D;
+  font-family: "Agdasima", sans-serif;
+  font-size: 30px;
+  font-weight: 500;
+  cursor: pointer;
+  margin: 0 0 0 5px;
+  text-decoration: none;
+}
+.registerlogin-mls-head > h3{
+  font-family: "Agdasima", sans-serif;
+  text-align: center;
+  margin: 50px 0 40px 0;
+}
+.registerlogin-mls-body > .registerlogin-mls-form, .registerlogin-mls-footer{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+  gap: 1px;
+  font-family: "Agdasima", sans-serif;
+}
+.registerlogin-mls-form > input{
+  background-color: white;
+  border: none;
+  padding: 10px 100px;
+  border-radius: 100px;
+}
+.error{
+  color: red;
+}
+
+.registerLogin-btn{
+  text-decoration: none;
+  border: none;
+  padding: 15px 100px;
+  background-color: #1B253D;
+  color: white;
+  border-radius: 100px;
+  margin-top: 25px;
+  font-family: "Agdasima", sans-serif;
+  font-size: 20px;
+  margin-bottom: 25px;
+  cursor: pointer;
+}
+.registerLogin-btn:hover{
+  color: #1B253D;
+  background-color: white;
+  border: #1B253D solid 1px;
+  margin-bottom: 23px;
+}
+.registerlogin-mls-footer > a{
+  text-decoration: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #1B253D;
+}
+.login-mls{
+  grid-area: loginMember;
+  align-content: center;
+}
+
+/* -------------------- MEMBER DASHBOARD --------------------- */
+.container-m-d{
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  grid-template-rows: 70px 89vh;
+  grid-template-areas: 
+  "nav-M-D nav-M-D"
+  "sidebar-M-D main-M-D";;
+}
+
+/* --- NAV MEMBER --- */
+.nav-m-d{
+  grid-area: nav-M-D;
+  background-color: #314675;
+  display: flex;
+  justify-content: space-between;
+}
+.nav-left-m-d > .logo-nav{
+  margin: 0 0 0 10px;
+}
+.nav-menu-m-d{
+  text-decoration: none;
+  color: #1B253D;
+}
+.nav-right-m-d {
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+}
+.nav-right-m-d > button{
+  padding: 15px 15px 12px 15px;
+  border-radius: 100%;
+  border:#1B253D solid 1px;
+  cursor: pointer;
+}
+.nav-right-m-d > button:hover{
+  background-color: #96a1b8;
+  color: rgb(81, 78, 99);
+}
+
+.menu-list{
+  background-color: #ffffff;
+  padding: 7px 20px 7px 10px;
+  margin: 0 -20px 0 0;
+  border: #1B253D solid 1px;
+  border-radius: 10px;
+}
+.menu-list > a{
+  text-decoration: none;
+  color: #1B253D;
+  margin: 5px;
+}
+.menu-list > button{
+  border: none;
+  background-color: white;
+  color: #1B253D;
+  margin: 0;
+  font-size: 20px;
+  font-family: "Agdasima", sans-serif;
+  cursor: pointer;
+}
+.menu-list > a:hover, button:hover{
+  color: rgb(128, 128, 128);
+}
+
+/* --- SIDEBAR MEMBER --- */
+.sidebar-m-d{
+  grid-area: sidebar-M-D;
+  background-color: #acacac;
+}
+.sidebar-m-d{
+  
+}
+
+/* SIDEBAR LIST CHOOSE */
+.sidebar-m-d-list-choose{
+  margin: 5px;
+}
+.sidebar-m-d-list-choose > a{
+  font-family: "Agdasima", sans-serif;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  font-size: 30px;
+  display: flex;
+  color: #1B253D;
+  background-color: white;
+  border-radius: 15px;
+}
+.sidebar-m-d-list-choose > a > p{
+  margin: 10px;
+}
+
+/* SIDEBAR LIST NOT_CHOOSE */
+.sidebar-m-d-list{
+  margin: 5px;
+}
+.sidebar-m-d-list > a{
+  font-family: "Agdasima", sans-serif;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  text-decoration: none;
+  font-size: 30px;
+  display: flex;
+  color: white;
+  background-color: #1B253D;
+  border-radius: 15px;
+}
+.sidebar-m-d-list > a > p{
+  margin: 10px;
+}
+.sidebar-m-d-list > a:hover{
+  color: #1B253D;
+  background-color: white;
+}
+
+/* --- MAIN MEMBER --- */
+.main-m-d{
+  background-color: #CFCFCF;
+  display: grid;
+  grid-template-rows: 82px 1fr;
+  grid-template-areas: 
+  "main-m-d-head main-m-d-head"
+  "main-m-d-body main-m-d-body";
+}
+.main-m-d-head{
+  grid-area: main-m-d-head;
+  display: grid;
+  grid-template-columns: 80% 1fr;
+  grid-template-areas: 
+  "main-m-d-searchbar add-service";
+}
+.main-m-d-head > h3{
+  color: #1B253D;
+  font-family: "Agdasima", sans-serif;
+  margin: 5px 10px;
+}
+.main-m-d-searchbar{
+  grid-area: main-m-d-searchbar;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  margin: 5px 10px;
+  padding: 10px;
+  gap: 10px;
+  width: 380px;
+  border-radius: 100px;
+}
+.add-service{
+  grid-area: add-service;
+  margin: auto;
+}
+.add-service > button{
+  border: none;
+  background-color:#1B253D;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 30px;
+  cursor: pointer;
+}
+.addService{
+  position: absolute;
+  background-color: white;
+  width: 300px;
+  right: 10px;
+  top: 120px;
+  height: 40px;
+  border-radius: 10px;
+}
+.addService > form {
+  display: flex;
+  margin-top: 3px;
+  margin-left: 3px;
+}
+.addService > form > input{
+  border: none;
+  background-color: gainsboro;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+.addService > form > button{
+  margin: 3px;
+  padding: 0 18px;
+  background-color:#314675;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.main-m-d-searchform > input{
+  height: 25px;
+  width: 300px;
+  border: none;
+  background-color: rgb(233, 233, 233);
+  border-radius: 10px;
+}
+.main-m-d-body{
+  grid-area: main-m-d-body;
+  background-color: white;
+  margin: 10px;
+  border-radius: 10px;
+}
+
+/* -- MEMBER TABLES -- */
+.main-m-d-body > table, .main-m-booking-list-left > table{
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+td, th{
+  text-align: left;
+  padding: 8px;
+}
+tr:nth-child(even) {
+  background-color: #dddddd;
+}
+.book-go{
+  background-color: green;
+  width: 80px;
+  text-align: center;
+  padding: 5px;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+.book-remove{
+  border: none;
+  top: 222px;
+  right: 318px;
+  background-color: red;
+  width: 80px;
+  text-align: center;
+  padding: 5px;
+  color: white;
+  cursor: pointer;
+}
+.main-m-d-body{
+
+}
+
+/* ------ MEMBER BOOKING DASHBOARD ------ */
+.main-m-d-b{
+  display: grid;
+  grid-template-columns: 40% 59%;
+  grid-template-rows: 100%;
+  grid-template-areas: 
+  "bookList profile"
+  "bookList profile";
+  gap: 10px;
+  margin: 0 10px 10px 10px;
+}
+.main-m-d-b > .main-m-b-left > h3, .main-m-d-b > .main-m-b-right > h3{
+  font-family: "Agdasima", sans-serif;
+  color: #1B253D;
+}
+.main-m-b-left{
+  grid-area: bookList;
+}
+.main-m-booking-list-left, .main-m-profile-right, .main-m-profile-right-view{
+  background-color: white;
+  height: 88%;
+  border-radius: 25px;
+}
+
+.view-profile{
+  background-color: #1B253D;
+  color: white;
+  border: none;
+  padding: 5px 20px;
+  width: 100%;
+  cursor: pointer;
+}
+.hide-profile{
+  background-color: #78849e;
+  color: white;
+  border: none;
+  padding: 5px 20px;
+  width: 100%;
+  cursor: pointer;
+}
+
+/* -- PROFILE -- */
+.main-m-b-right{
+  grid-area: profile;
+}
+.main-m-profile-right{
+  display: grid;
+  grid-template-columns: 100%;
+  grid-template-rows: 10% 55% 1fr;
+  grid-template-areas: 
+  "profile-head"
+  "profile-body"
+  "profile-booking";
+}
+
+.profile-head, .profile-head-left{
+  font-family: "Agdasima", sans-serif;
+  grid-area: profile-head;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.profile-head-left{
+  margin-left: 10px;
+}
+.profile-head-left > h2{
+  font-size: 40px;
+}
+.profile-head-left > h2, .profile-head-left > h4{
+  margin: 0;
+}
+.profile-head-right{
+  margin: 10px;
+  text-align: center;
+}
+.status-message > h4{
+  margin: 0;
+}
+.profile-available-btn{
+  border: none;
+  background-color: #1B253D;
+  color: white;
+  margin: 0 15px 0 0;
+  padding: 5px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.profile-available-btn:hover{
+  background-color: #375089;
+}
+
+/* -- AVAILABLE -- */
+.availability-table{
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: small;
+}
+.availibility > h4{
+  text-align: center;
+  font-family: "Agdasima", sans-serif;
+}
+.tr-available-table > td{
+  padding: 5px;
+}
+
+.profile-body{
+  grid-area: profile-body;
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 100%;
+  grid-template-areas: 
+  "profile-description profile-identity"
+  "profile-description profile-identity";
+}
+.profile-description, .profile-identity{
+  grid-area: profile-description;
+  display: flex;
+  flex-direction: column;
+  margin: 0 5px 5px 5px;
+}
+.profile-identity {
+  display: grid;
+  grid-template-rows: 70% 1fr;
+  gap: 5px;
+}
+.profile-description > h4, .profile-identity-d > h4, h5, .profile-identity-u > h4{
+  font-size: 12px;
+  font-family: "Agdasima", sans-serif;
+  margin: 0;
+}
+.profile-description > div, .profile-identity > div{
+  background-color: #D9D9D9;
+  height: 100%;
+  border-radius: 5px;
+}
+.profile-identity{
+  grid-area: profile-identity;
+}
+
+
+.profile-booking{
+  grid-area: profile-booking;
+}
+.profile-booking-form{
+  display: flex;
+  flex-direction: column;
+  margin: 5px;
+}
+
+.form-container-book{
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-template-rows: 66% 1fr;
+  grid-template-areas: 
+  "group1 group2"
+  "group3 group2";
+}
+.group1{
+  grid-area: group1;
+}
+.group2{
+  grid-area: group2;
+}
+.group3{
+  grid-area: group3;
+}
+.group1 > textarea{
+  resize: none;
+  height: 80%;
+  width: 98%;
+}
+.group2 > textarea{
+  resize: none;
+  height: 100px;
+  width: 99%;
+}
+.group3{
+  align-self: center;
+}
+
+.profile-booking-form{
+  font-family: "Agdasima", sans-serif;
+  font-size: 20px;
+}
+
+/* -------------------------- ADMIN MANAGE USERS -------------------------- */
+.admin-manage-edit{
+  background-color: green;
+  border: none;
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+}
+.admin-manage-edit-menu{
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  background-color: rgb(185, 185, 185);
+  padding: 2px;
+  right: 10px;
+  gap: 3px;
+}
+.admin-manage-edit-menu > button{
+  border-radius: 3px;
+  border: none;
+  cursor: pointer;
+}
+.admin-manage-edit:hover{
+  background-color: rgb(154, 207, 154);
+}
+.message-btn{
+  background-color: #576b9c;
+  color: white;
+}
+.message-btn:hover{
+  background-color: rgb(126, 126, 126);
+}
+.activate-btn{
+  background-color: rgb(255, 17, 0);
+  color: white;
+}
+.activate-btn:hover{
+  background-color: rgb(126, 126, 126);
+  color: white;
+}
+
+/* --------------------------- ADMIN STATISTICS ------------------------ */
+
+.main-admin-d-b{
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 10% 20% 20%;
+  grid-template-areas: 
+  "head-stats head-stats"
+  "top-stats top-stats"
+  "bottom-stats bottom-stats";
+  gap: 5px;
+  margin: 5px;
+}
+.head-stats{
+  grid-area: head-stats;
+}
+.top-stats > table, .bottom-stats > table{
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.top-stats, .bottom-stats{
+  grid-area: top-stats;
+  background-color: white;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.title-table-stats{
+  margin: 0;
+}
+.bottom-stats{
+  grid-area: bottom-stats;
+  background-color: white;
+  border-radius: 20px;
+}
+
+/* --------------------- EMPLOYEE MANAGE DASHBOARD -------------------- */
+.main-e-d{
+  display: block;
+  text-align: center;
+}
+.main-book-tables{
+  display: grid;
+  grid-template-columns: 50% 49.5%;
+  grid-template-rows: 250px 245px;
+  grid-template-areas: 
+  "upcoming-book-e-d pending-book-e-d"
+  "completed-book-e-d completed-book-e-d";
+  gap: 5px;
+  margin: 5px;
+}
+.upcoming-book-e-d{
+  grid-area: upcoming-book-e-d;
+  background-color: white;
+  border-radius: 10px;
+}
+.upcoming-book-table > table, .pending-book-table > table, .completed-book-table > table{
+  border-collapse: collapse;
+  width: 100%;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 12px;
+}
+.book-manage-btn{
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.book-manage-btn > button{
+  font-size: 10px;
+  color: white;
+  cursor: pointer;
+}
+
+.pending-book-e-d{
+  grid-area: pending-book-e-d;
+  background-color: white;
+  border-radius: 10px;
+}
+.completed-book-e-d{
+  grid-area: completed-book-e-d;
+  background-color: white;
+  border-radius: 10px;
+}
+
+/* ------------------ EMPLOYEE AVAILABILITY DASHBOARD ----------------- */
+.main-e-d-avilable{
+  display: grid;
+  grid-template-columns: 50% 49.5%;
+  grid-template-rows: 10% 1fr;
+  grid-template-areas:
+  "head-e-d-avail head-e-d-avail"
+  "sched-weekly sched-custom";
+  gap: 5px;
+  margin: 5px;
+}
+.head-e-d-avail{
+  grid-area: head-e-d-avail;
+}
+.head-e-d-avail > h3{
+  margin-left: 5px;
+}
+.sched-weekly, .sched-custom{
+  background-color: white;
+  grid-area: sched-weekly;
+  display: flex;
+  flex-direction: column;
+  border-radius: 15px;
+}
+.sched-weekly > table, .sched-custom > table{
+  font-size: small;
+  border-collapse: collapse;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.sched-custom{
+  grid-area: sched-custom;
+}
+.head-sched-custom{
+  display: flex;
+  justify-content: space-between;
+  margin: 5px;
+}
+.head-sched-custom > button{
+  margin: 10px;
+}
+.e-avail-edit{
+  cursor: pointer;
+  background-color: rgb(0, 163, 0);
+  color: white;
+}
+.e-avail-del{
+  cursor: pointer;
+  margin: 5px;
+  background-color: red;
+  color: white;
+}
+.e-avail-add{
+  cursor: pointer;
+  background-color: #1B253D;
+  color: white;
+}
+
+/* --- EMPLOYEE NOTIFY DASHBOARD */
+.main-e-d-notify{
+  display: block;
+  margin: 10px;
+}
+.e-d-notify{
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  height: 90%;
+  border-radius: 10px;
+}
+.e-d-notify > table{
+  font-size: small;
+  border-collapse: collapse;
+  text-align: center;
+  font-family: Arial, Helvetica, sans-serif;
+}
+.e-d-reply-emp{
+  cursor: pointer;
+  background-color: #1B253D;
+  color: white;
+}
