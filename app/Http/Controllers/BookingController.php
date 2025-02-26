@@ -12,80 +12,95 @@ use Inertia\Inertia;
 class BookingController extends Controller
 {
     public function index(Request $request)
-{
-    $employeeId = Auth::guard('employees')->id(); // Get authenticated employee's ID
-    $bookings = Booking::with('member') // Eager load the 'member' relationship
-                        ->select('booking_ID', 'member_ID', 'employee_ID', 'statusBooking', 'bookingDate', 'bookingTime', 'location', 'message')
-                        ->where('employee_ID', $employeeId)
-                        ->get(); // Adjust query as needed
+    {
+        $employeeId = Auth::guard('employees')->id(); // Get authenticated employee's ID
+        $bookings = Booking::with('member') // Eager load the 'member' relationship
+            ->select('booking_ID', 'member_ID', 'employee_ID', 'statusBooking', 'bookingDate', 'bookingTime', 'location', 'message')
+            ->where('employee_ID', $employeeId)
+            ->get(); // Adjust query as needed
 
-    if ($request->header('X-Inertia')) {
-        return Inertia::render('FixFinderMember/MemberDashboardBooking', [
-            'bookings' => $bookings
+        if ($request->header('X-Inertia')) {
+            return Inertia::render('FixFinderMember/MemberDashboardBooking', [
+                'bookings' => $bookings
+            ]);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $bookings,
         ]);
     }
 
-    return response()->json([
-        'success' => true,
-        'data' => $bookings,
-    ]);
-}
 
+    public function store(Request $request)
+    {
+        Log::info('Received statusBooking:', ['statusBooking' => $request->statusBooking]);
+        // Validate incoming request data
+        $request->validate([
+            'member_ID' => 'required|exists:members,member_ID',
+            'employee_ID' => 'required|exists:employees,employee_ID',
+            'statusBooking' => 'nullable|in:pending,completed,confirmed,cancelled', // Allow optional status, default to 'pending'
+            'bookingDate' => 'required|date',
+            'bookingTime' => 'required|date_format:H:i',
+            'message' => 'nullable|string',
+            'location' => 'nullable|string',
+        ]);
 
-    public function create(Request $request)
-{
-    // Validate incoming request data
-    $request->validate([
-        'member_ID' => 'required|exists:members,member_ID',
-        'employee_ID' => 'required|exists:employees,employee_ID',
-        'statusBooking' => 'nullable|in:pending,completed,confirmed,cancelled', // Allow optional status, default to 'pending'
-        'bookingDate' => 'required|date',
-        'bookingTime' => 'required|date_format:H:i',
-        'message' => 'nullable|string',
-        'location' => 'nullable|string',
-    ]);
+        // Default statusBooking to 'pending' if not provided
+        $statusBooking = $request->statusBooking ?: 'pending';
 
-    // Default statusBooking to 'pending' if not provided
-    $statusBooking = $request->statusBooking ?: 'pending';
+        // Extract member_ID and employee_ID from the request
+        $memberID = $request->member_ID;
+        $employeeID = $request->employee_ID;
 
-    // Extract member_ID and employee_ID from the request
-    $memberID = $request->member_ID;
-    $employeeID = $request->employee_ID;
+        // Check if an active booking exists for this member and the SAME employee
+        // $exists = DB::table('bookings')
+        //     ->where('member_ID', $memberID)
+        //     ->where('employee_ID', $employeeID)
+        //     ->whereNotIn('statusBooking', ['completed', 'cancelled'])
+        //     ->exists();
 
-    // Check if an active booking exists for this member and the SAME employee
-    $exists = DB::table('bookings')
-        ->where('member_ID', $memberID)
-        ->where('employee_ID', $employeeID)
-        ->whereNotIn('statusBooking', ['completed', 'cancelled'])
-        ->exists();
+        // if ($exists) {
+        //     $errorResponse = ['error' => 'An active booking already exists for this member and employee.'];
 
-    if ($exists) {
-        $errorResponse = ['error' => 'An active booking already exists for this member and employee.'];
+        //     if ($request->wantsJson()) {
+        //         return response()->json($errorResponse, 422);
+        //     }
 
-        if ($request->wantsJson()) {
-            return response()->json($errorResponse, 422);
+        //     return back()->withErrors($errorResponse);
+        // }
+        $existingBookings = DB::table('bookings')
+            ->where('member_ID', $memberID)
+            ->where('employee_ID', $employeeID)
+            ->whereNotIn('statusBooking', ['completed', 'cancelled'])
+            ->get();
+
+        Log::info('Existing bookings:', $existingBookings->toArray());
+
+        $exists = $existingBookings->isNotEmpty();
+
+        if ($exists) {
+            Log::info('Booking already exists for this member and employee.');
+            return response()->json(['error' => 'An active booking already exists for this member and employee.'], 422);
         }
 
-        return back()->withErrors($errorResponse);
+        // Proceed with storing the new booking
+        $booking = Booking::create([
+            'member_ID' => $memberID,
+            'employee_ID' => $employeeID,
+            'bookingDate' => $request->bookingDate,
+            'bookingTime' => $request->bookingTime,
+            'message' => $request->message ?? '',
+            'location' => $request->location ?? '',
+            'statusBooking' => $statusBooking, // Use the default or provided status
+        ]);
+
+        if ($request->wantsJson()) {
+            return response()->json(['message' => 'Booking created successfully!', 'data' => $booking], 201);
+        }
+
+        return back()->with('success', 'Booking created successfully!');
     }
-
-    // Proceed with storing the new booking
-    $booking = Booking::store([
-        'member_ID' => $memberID,
-        'employee_ID' => $employeeID,
-        'bookingDate' => $request->bookingDate,
-        'bookingTime' => $request->bookingTime,
-        'message' => $request->message,
-        'location' => $request->location,
-        'statusBooking' => $statusBooking, // Use the default or provided status
-    ]);
-
-    if ($request->wantsJson()) {
-        return response()->json(['message' => 'Booking created successfully!', 'data' => $booking], 201);
-    }
-
-    return back()->with('success', 'Booking created successfully!');
-}
 
 
     public function updateStatus(Request $request, $booking_ID)
@@ -116,10 +131,10 @@ class BookingController extends Controller
         if (!$booking) {
             return response()->json(['error' => 'Booking not found'], 404);
         }
-    
+
         // If booking exists, return the status
         return response()->json(['status' => $booking->statusBooking]);
-    }    
+    }
 
     public function confirmBooking($booking_ID)
     {

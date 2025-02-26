@@ -14,8 +14,17 @@ const props = defineProps({
 });
 
 // Button state based on ongoing booking
+// const hasOngoingBooking = computed(() => {
+//   return bookings.value.some(
+//     (booking) =>
+//       booking.member_ID === bookingForm.member_ID &&
+//       booking.employee_ID === bookingForm.employee_ID &&
+//       booking.statusBooking !== 'completed' &&
+//       booking.statusBooking !== 'cancelled'
+//   );
+// });
 const hasOngoingBooking = computed(() => {
-  return bookings.value.some(
+  return bookings.value.length > 0 && bookings.value.some(
     (booking) =>
       booking.member_ID === bookingForm.member_ID &&
       booking.employee_ID === bookingForm.employee_ID &&
@@ -149,11 +158,12 @@ const bookings = ref([]); // Initialize bookings as an empty array
 // Function to fetch bookings
 const fetchBookingStatus = async () => {
   try {
-    const response = await axios.get('/bookings', {
-      headers: {
-        'Authorization': `Bearer ${user?.api_token}` // Assuming `api_token` is the token for the user
-      }
-    });
+    const response = await axios.get('/bookings')
+    // , {
+    //   headers: {
+    //     'Authorization': `Bearer ${user?.api_token}` // Assuming `api_token` is the token for the user
+    //   }
+    // });
     const bookingsData = response.data.data;
     console.log('Fetched Bookings:', bookingsData);
 
@@ -178,23 +188,35 @@ const fetchBookingStatus = async () => {
 };
 
 // Inside your submitBooking function
-function submitBooking() {
-  bookingForm.statusBooking = 'pending'; // Set initial status as 'pending'
-  bookingForm.processing = true;
+// function submitBooking() {
+//   bookingForm.statusBooking = 'pending'; // Set initial status as 'pending'
+//   bookingForm.processing = true;
 
-  axios.post('/bookings', bookingForm)
-    .then((response) => {
-      bookingForm.processing = false;
-      fetchBookingStatus(); // Refresh booking status
-      alert('Booking created successfully!');
-    })
-    .catch((error) => {
-      bookingForm.processing = false;
-      console.error('Failed to submit booking:', error);
-      alert('Already Booking.');
-    });
+//   axios.post('/bookings', bookingForm)
+//     .then((response) => {
+//       bookingForm.processing = false;
+//       fetchBookingStatus(); // Refresh booking status
+//       alert('Booking created successfully!');
+//     })
+//     .catch((error) => {
+//       bookingForm.processing = false;
+//       console.error('Failed to submit booking:', error);
+//       alert('Already Booking.');
+//     });
+// }
+async function submitBooking() {
+    console.log("Sending booking request:", bookingForm);
+    bookingForm.statusBooking = 'pending';
+    try {
+        const response = await axios.post("/bookings", bookingForm);
+        console.log("Booking response:", response.data);
+        alert('Booking created successfully!');
+        fetchBookingStatus(); // Refresh the booking status
+    } catch (error) {
+        console.error("Booking failed:", error.response?.data || error);
+        alert('Booking failed. Please try again.');
+    }
 }
-
 
 // Clear the booking form
 function clearForm() {
